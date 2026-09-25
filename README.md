@@ -76,7 +76,7 @@ Documentation is collected under `docs/`. Start with `docs/README.md` for the in
 
 The project retains its GPL-3.0 license and required third-party notices. When distributing a modified build, preserve the applicable license and provide the corresponding source as required by GPL-3.0. Please also credit the original XAN project at https://github.com/bxane-dev/xan.
 
-🙏 **Special Thanks**
+## 🙏 **Special Thanks**
 
 A huge thank you to vivizzz007, **Vivi Music** and Kyant0, **AndroidLiquidGlass** for the code, ideas, inspiration, and open-source work that helped make XAN possible. ❤️
 
