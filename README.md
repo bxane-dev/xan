@@ -23,20 +23,6 @@ XAN is an Android music app for phones, tablets, Android TV, and Android Auto. T
 
 
 
-## Quick access
-
-Windows build and repository helpers live in `tools/windows/`. Branding hot-swap files live in `branding/`.
-
-- `branding/replace-logo.ps1 <png> [round-png]` — replace the XAN mark and round launcher variant.
-- `BUILD-RELEASE.bat` — build a versioned release APK.
-- `BUILD-DEBUG.bat` — build an installable debug APK.
-- `UPDATE-REPO.bat` — update a local clone to the latest `main`.
-- `UPDATE-DEPENDENCIES.bat` — update dependencies, migrate source compatibility, and compile-check.
-- `UPDATE-SOURCE.bat` — run source compatibility migrations and compile-check only.
-- `CHANGELOG.md` — release oriented changes for this build.
-
-Finished local APKs are copied to the root `dist/` folder.
-
 ## Install and build
 
 XAN supports Android 8.0 (API 26) and newer. Install a signed release APK on the device, or open this directory in Android Studio. On Windows, run `build-release.bat` for the default FOSS release or `build-release.bat v0.1.1` for another version. Run `build-debug.bat` for a debug APK. The builders need Android Studio or a JDK 21+ and an Android SDK with the project's compile SDK installed. The first release build generates a `bxane` signing key if one is not already present. Back up `app/keystore/release.keystore` and `local.properties` securely: future updates must use the same key.
