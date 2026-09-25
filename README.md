@@ -1,8 +1,18 @@
 # XAN
 
-**Current version: 0.1.0**
+
+🎵 Meet XAN — your music, your way.
+
+A sleek local music player built for people who actually own their music. Enjoy your library with a clean interface, playlists, lyrics, queue controls, and more — all without relying on streaming services.
+
+🎧 Your music. No subscriptions. No distractions.
+🚀 Open source & built for local playback.
+
+Check out XAN on GitHub and give it a try!
+
 
 XAN is an Android music app for phones, tablets, Android TV, and Android Auto. The app uses a single XAN launcher identity across supported Android surfaces.
+
 
 **Author · Lead Dev · Owner:** bxane
 
