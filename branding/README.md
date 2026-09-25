@@ -6,14 +6,14 @@ This folder contains the XAN master mark, its supplied round variant, and the bu
 
 Replace exactly this file:
 
-`branding/hotswap/android/res/drawable-nodpi/xan_mark.png`
+`branding/hotswap/android/res/drawable-nodpi/xan_mark.webp`
 
-`xan_round_mark.png` is used for the round launcher icon. `bxane_profile.jpg` is used in About.
+`xan_round_mark.webp` is used for the round launcher icon. `bxane_profile.jpg` is used in About.
 
-Keep the filename `xan_mark.png`, then rebuild the APK.
+Keep the filename `xan_mark.webp`, then rebuild the APK. PNG is also supported.
 
 Recommended source:
-- transparent PNG
+- transparent PNG or WebP
 - square canvas
 - 512×512 or 1024×1024
 - centered mark with safe padding
@@ -53,4 +53,4 @@ Then rebuild the APK.
 
 ## Rule
 
-Use `xan_mark.png` for general branding and artwork fallbacks. Use `xan_round_mark.png` only for the round launcher shape.
+Use `xan_mark.webp` for general branding and artwork fallbacks. Use `xan_round_mark.webp` only for the round launcher shape.
