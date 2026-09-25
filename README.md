@@ -21,9 +21,6 @@ XAN is an Android music app for phones, tablets, Android TV, and Android Auto. T
 - Creator: https://guns.lol/bxane
 - Support: https://discord.gg/h4Wsu824Uf
 
-> The Android app reads the Discord invite from this README at runtime. Change the
-> `Support:` Discord URL here to update the invite used by builds that can access
-> the public README. The APK also carries the same invite as an offline fallback.
 
 
 ## Quick access
