@@ -76,6 +76,20 @@ Documentation is collected under `docs/`. Start with `docs/README.md` for the in
 
 The project retains its GPL-3.0 license and required third-party notices. When distributing a modified build, preserve the applicable license and provide the corresponding source as required by GPL-3.0. Please also credit the original XAN project at https://github.com/bxane-dev/xan.
 
+🙏 **Special Thanks**
+
+A huge thank you to vivizzz007, **Vivi Music** and Kyant0, **AndroidLiquidGlass** for the code, ideas, inspiration, and open-source work that helped make XAN possible. ❤️
+
+Please check out and support these awesome projects:
+
+🎵 Vivi Music
+[github.com/vivizzz007/vivi-music](https://github.com/vivizzz007/vivi-music?utm_source=chatgpt.com)
+
+✨ AndroidLiquidGlass
+[github.com/Kyant0/AndroidLiquidGlass](https://github.com/Kyant0/AndroidLiquidGlass?utm_source=chatgpt.com)
+
+Open source makes projects like XAN possible. Huge respect to everyone who shares their work with the community! ❤️
+
 ## Dependency automation
 
 XAN includes a dependency + source compatibility updater. The repository runs `.github/workflows/dependency-updater.yml` every Monday and can also be run manually. It updates dependency versions, applies registered source migrations for known breaking APIs, compile-checks `:app:compileUniversalGmsDebugKotlin`, and only then opens or refreshes the `automation/dependency-updates` pull request. Unknown future API breaks stop the workflow instead of publishing a broken update branch.
