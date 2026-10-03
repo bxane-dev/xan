@@ -2365,7 +2365,9 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    if (useMagnetNavigation) {
+                    // The player expands over the navigation chrome. Do not leave
+                    // the separately hosted Magnet on top of the full-screen player.
+                    if (useMagnetNavigation && !playerAboveBars) {
                         app.xan.music.ui.component.NavigationMagnet(
                         currentRoute = effectiveRoute,
                         onLeft = magnetOnLeft,
@@ -2405,7 +2407,6 @@ class MainActivity : ComponentActivity() {
                             .imePadding()
                             .padding(start = if (magnetOnLeft) 16.dp else 0.dp, end = if (magnetOnLeft) 0.dp else 16.dp, bottom = when {
                                 inSearchScreen -> 76.dp
-                                playerAboveBars -> 96.dp
                                 else -> 16.dp
                             }),
                         )

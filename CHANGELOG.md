@@ -12,6 +12,7 @@
 ### Player
 - Fixed the mini-player disappearing in the collapsed state. A downward swipe still dismisses it until the track changes.
 - Widened the Magnet-mode mini-player to fill the space beside the Magnet, leaving a three-pixel gap on either side setting.
+- Hide the Magnet while the full-screen player is open and restore it when the player collapses.
 - Magnet mode now centers the mini-player vertically with the 56dp Magnet button.
 - In Magnet mode the mini-player is anchored to the side opposite the Magnet with a reserved touch zone, preventing overlap.
 - Swiping the mini-player downward dismisses it in both Magnet and Basic / Legacy styles.
