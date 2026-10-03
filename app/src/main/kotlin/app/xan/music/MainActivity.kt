@@ -1223,6 +1223,12 @@ class MainActivity : ComponentActivity() {
 
                 val playerMediaMetadata by playerConnection?.mediaMetadata?.collectAsStateWithLifecycle()
                     ?: remember { mutableStateOf(null) }
+                // The sheet's collapsed and dismissed bounds are both 0.dp because the
+                // mini player lives in the navigation chrome. Track a swipe dismissal
+                // separately; sheet.isDismissed cannot distinguish the two states.
+                var playerAccessoryDismissed by remember(playerMediaMetadata?.id) {
+                    mutableStateOf(false)
+                }
                 // With the floating nav bar the mini player docks into the tab bar as an
                 // accessory, and in tab view it docks into the sidebar footer, so in both
                 // cases the sheet's collapsed state coincides with dismissed and the
@@ -1254,7 +1260,7 @@ class MainActivity : ComponentActivity() {
                 // the search-expanded/search-inline chrome) â€” it only drops out once the
                 // keyboard takes over the bar entirely.
                 val hasDockedPlayerAccessory =
-                    playerMediaMetadata != null && !playerBottomSheetState.isDismissed &&
+                    playerMediaMetadata != null && !playerAccessoryDismissed &&
                         !showRail && shouldShowNavigationBar &&
                         (!inSearchScreen || !searchKeyboardActive)
                 val playerAwareWindowInsets = remember(
@@ -1774,14 +1780,10 @@ class MainActivity : ComponentActivity() {
 
                             // Pre-calculate values for graphicsLayer to avoid reading state during composition
                             val navBarTotalHeight = bottomInset + NavigationBarHeight
-                            // The 72dp Magnet-mode player and 56dp Magnet share a visual center:
-                            // player bottom 8dp + 36dp half-height == Magnet bottom 16dp + 28dp.
-                            val navigationBottomPadding = 8.dp
-                            val magnetPlayerHorizontalShift = when {
-                                !useMagnetNavigation || !hasDockedPlayerAccessory || inSearchScreen -> 0.dp
-                                magnetOnLeft -> 16.dp
-                                else -> (-16).dp
-                            }
+                            // The 64dp pill and 56dp Magnet share a visual center:
+                            // player bottom 12dp + 32dp == Magnet bottom 16dp + 28dp.
+                            val navigationBottomPadding =
+                                if (useMagnetNavigation && hasDockedPlayerAccessory && !inSearchScreen) 12.dp else 8.dp
 
                             if (!showRail && !showSettingDialoge && currentRoute?.startsWith("settings/") != true && currentRoute !in setOf("wrapped", "update", "listen_together/chat", "login", "equalizer", "ambient_mode")) {
                                 Box {
@@ -1851,7 +1853,10 @@ class MainActivity : ComponentActivity() {
                                         useMagnetNavigation = useMagnetNavigation,
                                         magnetOnLeft = magnetOnLeft,
                                         onAccessoryClick = { playerBottomSheetState.expandSoft() },
-                                        onAccessoryDismiss = { playerBottomSheetState.dismiss() },
+                                        onAccessoryDismiss = {
+                                            playerAccessoryDismissed = true
+                                            playerBottomSheetState.dismiss()
+                                        },
                                         onAccessoryLyricsClick = {
                                             playerBottomSheetState.expandSoft()
                                             playerConnection?.requestShowLyrics?.value = true
@@ -1890,11 +1895,6 @@ class MainActivity : ComponentActivity() {
                                                 } else {
                                                     hiddenOffset * (1 - navBarHeightPx / NavigationBarHeight.toPx())
                                                 }
-                                                // Keep the Magnet-mode player beside the Magnet
-                                                // instead of underneath it. Mirror the shift when
-                                                // the Magnet is placed on the left.
-                                                translationX = magnetPlayerHorizontalShift.toPx()
-
                                             }
                                     )
 
