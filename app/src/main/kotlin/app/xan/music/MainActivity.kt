@@ -1773,7 +1773,14 @@ class MainActivity : ComponentActivity() {
 
                             // Pre-calculate values for graphicsLayer to avoid reading state during composition
                             val navBarTotalHeight = bottomInset + NavigationBarHeight
-                            val navigationBottomPadding = if (useMagnetNavigation) 16.dp else 8.dp
+                            // The 72dp Magnet-mode player and 56dp Magnet share a visual center:
+                            // player bottom 8dp + 36dp half-height == Magnet bottom 16dp + 28dp.
+                            val navigationBottomPadding = 8.dp
+                            val magnetPlayerHorizontalShift = when {
+                                !useMagnetNavigation || !hasDockedPlayerAccessory || inSearchScreen -> 0.dp
+                                magnetOnLeft -> 16.dp
+                                else -> (-16).dp
+                            }
 
                             if (!showRail && !showSettingDialoge && currentRoute?.startsWith("settings/") != true && currentRoute !in setOf("wrapped", "update", "listen_together/chat", "login", "equalizer", "ambient_mode")) {
                                 Box {
@@ -1880,6 +1887,10 @@ class MainActivity : ComponentActivity() {
                                                 } else {
                                                     hiddenOffset * (1 - navBarHeightPx / NavigationBarHeight.toPx())
                                                 }
+                                                // Keep the Magnet-mode player beside the Magnet
+                                                // instead of underneath it. Mirror the shift when
+                                                // the Magnet is placed on the left.
+                                                translationX = magnetPlayerHorizontalShift.toPx()
 
                                             }
                                     )
