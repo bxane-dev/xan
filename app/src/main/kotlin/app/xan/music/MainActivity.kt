@@ -1254,7 +1254,8 @@ class MainActivity : ComponentActivity() {
                 // the search-expanded/search-inline chrome) â€” it only drops out once the
                 // keyboard takes over the bar entirely.
                 val hasDockedPlayerAccessory =
-                    playerMediaMetadata != null && !showRail && shouldShowNavigationBar &&
+                    playerMediaMetadata != null && !playerBottomSheetState.isDismissed &&
+                        !showRail && shouldShowNavigationBar &&
                         (!inSearchScreen || !searchKeyboardActive)
                 val playerAwareWindowInsets = remember(
                     bottomInset,
@@ -1848,7 +1849,9 @@ class MainActivity : ComponentActivity() {
                                         pureBlack = pureBlack,
                                         showPlayerAccessory = hasDockedPlayerAccessory,
                                         useMagnetNavigation = useMagnetNavigation,
+                                        magnetOnLeft = magnetOnLeft,
                                         onAccessoryClick = { playerBottomSheetState.expandSoft() },
+                                        onAccessoryDismiss = { playerBottomSheetState.dismiss() },
                                         onAccessoryLyricsClick = {
                                             playerBottomSheetState.expandSoft()
                                             playerConnection?.requestShowLyrics?.value = true
