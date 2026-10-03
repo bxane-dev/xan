@@ -48,7 +48,7 @@ jobs:
           ./gradlew :app:assembleDebug --no-daemon --no-configuration-cache --console=plain --warning-mode summary -Dorg.gradle.problems.report=false
 
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: xan-debug
           path: app/build/outputs/apk/debug/*.apk
