@@ -11,13 +11,14 @@
 
 ### Player
 - Magnet mode now centers the mini-player vertically with the 56dp Magnet button.
-- The mini-player shifts 16dp away from the Magnet so it no longer overlaps the button.
+- In Magnet mode the mini-player is anchored to the side opposite the Magnet with a reserved touch zone, preventing overlap.
+- Swiping the mini-player downward dismisses it in both Magnet and Basic / Legacy styles.
 - Basic / Legacy mode restores the 0.6.5 player spacing and placement alongside the classic navigation buttons.
 - Switching navigation style changes the navigation and player layout together to avoid mixed layouts.
 
 ### App icon
-- Balanced launcher and APK/installer icon sizing so both render at roughly the same visual scale.
-- Enlarged the adaptive launcher foreground and slightly reduced the legacy installer icon.
+- Split launcher and installer icon resources so their sizes can be tuned independently.
+- Enlarged the installed launcher icon while reducing the Play Protect / installer adaptive foreground.
 
 ### Release
 - Version: **0.6.6**
