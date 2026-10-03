@@ -1,4 +1,4 @@
-# Final 0.6.6 artifact build
+# Final 0.6.6 artifact build after UI label
 name: Build XAN 0.6.6 APK
 
 on:
