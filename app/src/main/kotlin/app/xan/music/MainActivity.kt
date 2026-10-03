@@ -1858,7 +1858,7 @@ class MainActivity : ComponentActivity() {
                                             // instead of stretching across the wide screen.
                                             .widthIn(max = 500.dp)
                                             .padding(horizontal = 16.dp)
-                                            .padding(bottom = bottomInset + 8.dp)
+                                            .padding(bottom = bottomInset + 16.dp)
                                             .graphicsLayer {
                                                 // The floating bar (especially with the docked
                                                 // player accessory) is taller than the classic

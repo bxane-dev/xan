@@ -197,7 +197,6 @@ fun AppFloatingNavBar(
                         )
                     }
                 }
-                androidx.compose.foundation.layout.Spacer(Modifier.height(72.dp))
             }
         }
     }
