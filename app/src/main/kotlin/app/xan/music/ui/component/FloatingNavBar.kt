@@ -137,6 +137,7 @@ fun AppFloatingNavBar(
     pureBlack: Boolean = false,
     showPlayerAccessory: Boolean = false,
     useMagnetNavigation: Boolean = true,
+    magnetOnLeft: Boolean = false,
     onAccessoryClick: () -> Unit = {},
     onAccessoryLyricsClick: (() -> Unit)? = null,
     onAccessoryQueueClick: (() -> Unit)? = null,
@@ -189,7 +190,17 @@ fun AppFloatingNavBar(
                         modifier = Modifier.fillMaxWidth().height(48.dp),
                     )
                 } else if (showPlayerAccessory) {
-                    BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    // In Magnet mode the player owns the opposite side of the screen.
+                    // Reserve a full Magnet touch zone so the pill can never overlap it.
+                    BoxWithConstraints(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = if (magnetOnLeft) 80.dp else 0.dp,
+                                end = if (magnetOnLeft) 0.dp else 80.dp,
+                            ),
+                        contentAlignment = if (magnetOnLeft) Alignment.CenterEnd else Alignment.CenterStart,
+                    ) {
                         AppFloatingNowPlayingPill(
                             onClick = onAccessoryClick,
                             onLyricsClick = onAccessoryLyricsClick,
