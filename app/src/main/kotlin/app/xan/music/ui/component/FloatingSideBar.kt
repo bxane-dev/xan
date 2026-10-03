@@ -469,6 +469,7 @@ fun BoxWithConstraintsScope.AppFloatingNowPlayingPill(
     pureBlack: Boolean = false,
     onLyricsClick: (() -> Unit)? = null,
     onQueueClick: (() -> Unit)? = null,
+    onDismissDown: (() -> Unit)? = null,
 ) {
     val glassConfig = LocalGlassEffectConfig.current
     val useGlass = glassConfig.isEnabledFor(GlassComponent.SIDE_PANEL) && isGlassAllowed()
@@ -498,6 +499,7 @@ fun BoxWithConstraintsScope.AppFloatingNowPlayingPill(
         // See AppNavigation: hardcoded white disappeared on light themes.
         contentColor = if (useGlass) glassConfig.textColor else MaterialTheme.colorScheme.onSurface,
         onClick = onClick,
+        onDismissDown = onDismissDown,
         onLyricsClick = onLyricsClick,
         onQueueClick = onQueueClick,
         modifier = modifier
