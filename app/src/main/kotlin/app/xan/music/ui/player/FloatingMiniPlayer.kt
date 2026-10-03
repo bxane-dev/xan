@@ -113,6 +113,7 @@ fun FloatingMiniPlayer(
     modifier: Modifier = Modifier,
     onLyricsClick: (() -> Unit)? = null,
     onQueueClick: (() -> Unit)? = null,
+    onDismissDown: (() -> Unit)? = null,
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
     val mediaMetadata by playerConnection.mediaMetadata.collectAsStateWithLifecycle()
@@ -140,6 +141,8 @@ fun FloatingMiniPlayer(
     val densityScale = density.density
 
     val offsetXAnimatable = remember { Animatable(0f) }
+    val offsetYAnimatable = remember { Animatable(0f) }
+    val dismissThresholdPx = with(density) { 44.dp.toPx() }
     var dragStartTime by remember { mutableLongStateOf(0L) }
     var totalDragDistance by remember { mutableFloatStateOf(0f) }
     val animationSpec = remember {
@@ -184,6 +187,7 @@ fun FloatingMiniPlayer(
             .graphicsLayer {
                 scaleX = pressScale
                 scaleY = pressScale
+                translationY = offsetYAnimatable.value
             }
             .then(modifier)
             // Source end of the mini-to-full container morph. Outside .then(modifier)
@@ -202,6 +206,40 @@ fun FloatingMiniPlayer(
             .then(interactiveHighlight.modifier)
             .clipToBounds()
             .then(interactiveHighlight.gestureModifier)
+            .then(
+                if (onDismissDown != null) {
+                    Modifier.pointerInput(onDismissDown) {
+                        detectVerticalDragGestures(
+                            onDragCancel = {
+                                coroutineScope.launch {
+                                    offsetYAnimatable.animateTo(0f, animationSpec)
+                                }
+                            },
+                            onDragEnd = {
+                                if (offsetYAnimatable.value >= dismissThresholdPx) {
+                                    onDismissDown()
+                                    coroutineScope.launch { offsetYAnimatable.snapTo(0f) }
+                                } else {
+                                    coroutineScope.launch {
+                                        offsetYAnimatable.animateTo(0f, animationSpec)
+                                    }
+                                }
+                            },
+                            onVerticalDrag = { change, dragAmount ->
+                                val nextOffset = (offsetYAnimatable.value + dragAmount).coerceAtLeast(0f)
+                                if (dragAmount > 0f || offsetYAnimatable.value > 0f) {
+                                    change.consume()
+                                    coroutineScope.launch {
+                                        offsetYAnimatable.snapTo(nextOffset)
+                                    }
+                                }
+                            },
+                        )
+                    }
+                } else {
+                    Modifier
+                }
+            )
             .then(
                 if (swipeEnabled) {
                     Modifier.pointerInput(Unit) {
