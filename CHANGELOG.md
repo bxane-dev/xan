@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.7
+
+- Reduced the installed launcher mark by about 20% and the APK installer mark by 50% across adaptive, themed, and legacy icons.
+
 ## 0.6.6
 
 ### Navigation
