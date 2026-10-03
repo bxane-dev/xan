@@ -15,5 +15,9 @@
 - Basic / Legacy mode restores the 0.6.5 player spacing and placement alongside the classic navigation buttons.
 - Switching navigation style changes the navigation and player layout together to avoid mixed layouts.
 
+### App icon
+- Balanced launcher and APK/installer icon sizing so both render at roughly the same visual scale.
+- Enlarged the adaptive launcher foreground and slightly reduced the legacy installer icon.
+
 ### Release
 - Version: **0.6.6**

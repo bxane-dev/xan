@@ -6,7 +6,7 @@
         </shape>
     </item>
     <item android:drawable="@drawable/xan_mark"
-        android:left="21dp" android:top="21dp"
-        android:right="21dp" android:bottom="21dp"
+        android:left="26dp" android:top="26dp"
+        android:right="26dp" android:bottom="26dp"
         android:gravity="center" />
 </layer-list>
