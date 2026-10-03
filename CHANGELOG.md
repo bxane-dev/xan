@@ -18,7 +18,7 @@
 
 ### App icon
 - Split launcher and installer icon resources so their sizes can be tuned independently.
-- Enlarged the installed launcher icon while reducing the Play Protect / installer adaptive foreground.
+- Balanced the installed launcher and Play Protect / installer icon sizes across adaptive and legacy icons.
 
 ### Release
 - Version: **0.6.6**

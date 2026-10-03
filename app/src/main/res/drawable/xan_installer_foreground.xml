@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/xan_mark"
-    android:insetLeft="36dp"
-    android:insetTop="36dp"
-    android:insetRight="36dp"
-    android:insetBottom="36dp" />
+    android:insetLeft="28dp"
+    android:insetTop="28dp"
+    android:insetRight="28dp"
+    android:insetBottom="28dp" />

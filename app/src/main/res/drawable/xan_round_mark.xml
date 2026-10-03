@@ -5,6 +5,6 @@
         </shape>
     </item>
     <item android:drawable="@drawable/xan_mark"
-        android:left="14dp" android:top="14dp"
-        android:right="14dp" android:bottom="14dp" />
+        android:left="9dp" android:top="9dp"
+        android:right="9dp" android:bottom="9dp" />
 </layer-list>
