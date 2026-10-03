@@ -466,6 +466,7 @@ private fun SideNavTabs(
 fun BoxWithConstraintsScope.AppFloatingNowPlayingPill(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    widthFraction: Float = FloatingMiniPlayerWidthFraction,
     pureBlack: Boolean = false,
     onLyricsClick: (() -> Unit)? = null,
     onQueueClick: (() -> Unit)? = null,
@@ -475,7 +476,7 @@ fun BoxWithConstraintsScope.AppFloatingNowPlayingPill(
     val useGlass = glassConfig.isEnabledFor(GlassComponent.SIDE_PANEL) && isGlassAllowed()
     val pillShape = ContinuousRoundedRectangle(percent = 50)
 
-    val width = maxWidth * FloatingMiniPlayerWidthFraction
+    val width = maxWidth * widthFraction
     val height = (width * FloatingMiniPlayerAspect)
         .coerceIn(FloatingMiniPlayerMinHeight, FloatingMiniPlayerMaxHeight)
 

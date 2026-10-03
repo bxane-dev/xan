@@ -59,6 +59,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -191,19 +192,22 @@ fun AppFloatingNavBar(
                         modifier = Modifier.fillMaxWidth().height(48.dp),
                     )
                 } else if (showPlayerAccessory) {
-                    // In Magnet mode the player owns the opposite side of the screen.
-                    // Reserve a full Magnet touch zone so the pill can never overlap it.
+                    // The bar and Magnet share a 16dp outer inset. Reserve only
+                    // the 56dp Magnet itself plus three physical pixels between
+                    // their touch bounds; the player fills all remaining width.
+                    val magnetGap = with(LocalDensity.current) { 3.toDp() }
                     BoxWithConstraints(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(
-                                start = if (magnetOnLeft) 80.dp else 0.dp,
-                                end = if (magnetOnLeft) 0.dp else 80.dp,
+                                start = if (magnetOnLeft) 56.dp + magnetGap else 0.dp,
+                                end = if (magnetOnLeft) 0.dp else 56.dp + magnetGap,
                             ),
                         contentAlignment = if (magnetOnLeft) Alignment.CenterEnd else Alignment.CenterStart,
                     ) {
                         AppFloatingNowPlayingPill(
                             onClick = onAccessoryClick,
+                            widthFraction = 1f,
                             onLyricsClick = onAccessoryLyricsClick,
                             onQueueClick = onAccessoryQueueClick,
                             onDismissDown = onAccessoryDismiss,
