@@ -234,7 +234,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 dependencies {
     // Audio-only FFmpeg build: real MP3/AAC/FLAC/WAV/Opus/Vorbis conversion.
-    implementation("dev.ffmpegkit-maintained:ffmpeg-kit-audio:8.1.7")
+    implementation("dev.ffmpegkit-maintained:ffmpeg-kit-audio:8.1.9")
     // The fork's published POM omits this runtime dependency used by its error callbacks.
     implementation("com.arthenica:smart-exception-java:0.2.1")
     implementation("androidx.documentfile:documentfile:1.1.0")
