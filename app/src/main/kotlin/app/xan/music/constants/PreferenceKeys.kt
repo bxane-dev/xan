@@ -85,6 +85,8 @@ val DefaultOpenTabKey = stringPreferencesKey("defaultOpenTab")
 val SlimNavBarKey = booleanPreferencesKey("slimNavBar")
 /** True places the global magnet in the bottom-left corner. */
 val MagnetOnLeftKey = booleanPreferencesKey("magnetOnLeft")
+/** True uses the Magnet navigation; false restores the legacy floating navigation buttons. */
+val UseMagnetNavigationKey = booleanPreferencesKey("useMagnetNavigation")
 val GridItemsSizeKey = stringPreferencesKey("gridItemSize")
 /** 0 = auto (GridColumnMinWidth-driven), else a fixed column count for every adaptive grid. */
 val GridColumnsOverrideKey = intPreferencesKey("gridColumnsOverride")

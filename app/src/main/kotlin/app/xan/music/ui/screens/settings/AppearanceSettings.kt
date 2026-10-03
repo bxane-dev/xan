@@ -142,6 +142,7 @@ import app.xan.music.constants.HomeHeroCardEnabledKey
 import app.xan.music.constants.PureBlackHeroBackgroundKey
 import app.xan.music.constants.HideHomeFavoriteIconKey
 import app.xan.music.constants.MagnetOnLeftKey
+import app.xan.music.constants.UseMagnetNavigationKey
 import app.xan.music.ui.utils.GridColumnChoices
 import app.xan.music.ui.utils.GridSpacingChoices
 import androidx.compose.material3.Slider
@@ -361,6 +362,7 @@ fun AppearanceSettings(
     val (gridSpacing, onGridSpacingChange) = rememberPreference(GridSpacingKey, 16)
     val (speedDialColumnsOverride, onSpeedDialColumnsOverrideChange) = rememberPreference(SpeedDialColumnsOverrideKey, 0)
     val (pureBlackHeroBackground, onPureBlackHeroBackgroundChange) = rememberPreference(PureBlackHeroBackgroundKey, false)
+    val (useMagnetNavigation, onUseMagnetNavigationChange) = rememberPreference(UseMagnetNavigationKey, defaultValue = true)
     val (magnetOnLeft, onMagnetOnLeftChange) = rememberPreference(MagnetOnLeftKey, defaultValue = false)
     val (hideHomeFavoriteIcon, onHideHomeFavoriteIconChange) = rememberPreference(
         HideHomeFavoriteIconKey,
@@ -1297,6 +1299,34 @@ fun AppearanceSettings(
                         )
                     },
                     onClick = { onPureBlackHeroBackgroundChange(!pureBlackHeroBackground) }
+                ),
+                Material3SettingsItem(
+                    icon = painterResource(R.drawable.nav_bar),
+                    title = { Text(stringResource(R.string.navigation_style)) },
+                    description = {
+                        Text(
+                            stringResource(
+                                if (useMagnetNavigation) R.string.navigation_style_magnet
+                                else R.string.navigation_style_legacy_buttons
+                            )
+                        )
+                    },
+                    trailingContent = {
+                        Switch(
+                            checked = useMagnetNavigation,
+                            onCheckedChange = onUseMagnetNavigationChange,
+                            thumbContent = {
+                                Icon(
+                                    painter = painterResource(
+                                        id = if (useMagnetNavigation) R.drawable.check else R.drawable.xan_icon_close
+                                    ),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(SwitchDefaults.IconSize)
+                                )
+                            }
+                        )
+                    },
+                    onClick = { onUseMagnetNavigationChange(!useMagnetNavigation) }
                 ),
                 Material3SettingsItem(
                     icon = painterResource(R.drawable.xan_icon_modules),

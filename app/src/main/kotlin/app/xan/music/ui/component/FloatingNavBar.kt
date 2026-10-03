@@ -136,6 +136,7 @@ fun AppFloatingNavBar(
     modifier: Modifier = Modifier,
     pureBlack: Boolean = false,
     showPlayerAccessory: Boolean = false,
+    useMagnetNavigation: Boolean = true,
     onAccessoryClick: () -> Unit = {},
     onAccessoryLyricsClick: (() -> Unit)? = null,
     onAccessoryQueueClick: (() -> Unit)? = null,
@@ -179,7 +180,7 @@ fun AppFloatingNavBar(
                 pureBlack = pureBlack,
                 modifier = Modifier.fillMaxWidth(),
             )
-        } else {
+        } else if (useMagnetNavigation) {
             androidx.compose.foundation.layout.Column(Modifier.fillMaxWidth()) {
                 if (navSearch.visualActive) {
                     SearchBarPlaceholder(
@@ -198,6 +199,22 @@ fun AppFloatingNavBar(
                     }
                 }
             }
+        } else {
+            AppFloatingNavBarChrome(
+                navigationItems = navigationItems,
+                currentRoute = currentRoute,
+                onItemClick = onItemClick,
+                scrollConnection = scrollConnection,
+                pureBlack = pureBlack,
+                showPlayerAccessory = showPlayerAccessory,
+                onAccessoryClick = onAccessoryClick,
+                onAccessoryLyricsClick = onAccessoryLyricsClick,
+                onAccessoryQueueClick = onAccessoryQueueClick,
+                searchModeActive = navSearch.visualActive,
+                navSearch = navSearch,
+                tabPosition = tabPosition,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }

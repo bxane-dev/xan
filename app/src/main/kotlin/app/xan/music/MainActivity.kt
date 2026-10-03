@@ -229,6 +229,7 @@ import app.xan.music.constants.SlimNavBarHeight
 import app.xan.music.constants.ForceTabletLayoutKey
 import app.xan.music.constants.PlaylistSortType
 import app.xan.music.constants.SlimNavBarKey
+import app.xan.music.constants.UseMagnetNavigationKey
 import app.xan.music.constants.UseNewMiniPlayerDesignKey
 import app.xan.music.db.MusicDatabase
 import app.xan.music.db.entities.SearchHistory
@@ -875,6 +876,7 @@ class MainActivity : ComponentActivity() {
                 // mean a second DataStore collector for one boolean.
                 val (localOnlyMode) = rememberPreference(LocalOnlyModeKey, false)
                 val (magnetOnLeft) = rememberPreference(app.xan.music.constants.MagnetOnLeftKey, false)
+                val (useMagnetNavigation) = rememberPreference(UseMagnetNavigationKey, defaultValue = true)
                 val navigationItems = remember(listenTogetherInTopBar, localOnlyMode) {
                     // Local-only mode adds the flat all-songs tab after Home.
                     val screens = Screens.mainScreens(localOnlyMode)
@@ -1771,6 +1773,7 @@ class MainActivity : ComponentActivity() {
 
                             // Pre-calculate values for graphicsLayer to avoid reading state during composition
                             val navBarTotalHeight = bottomInset + NavigationBarHeight
+                            val navigationBottomPadding = if (useMagnetNavigation) 16.dp else 8.dp
 
                             if (!showRail && !showSettingDialoge && currentRoute?.startsWith("settings/") != true && currentRoute !in setOf("wrapped", "update", "listen_together/chat", "login", "equalizer", "ambient_mode")) {
                                 Box {
@@ -1837,6 +1840,7 @@ class MainActivity : ComponentActivity() {
                                         scrollConnection = floatingNavBarScrollConnection,
                                         pureBlack = pureBlack,
                                         showPlayerAccessory = hasDockedPlayerAccessory,
+                                        useMagnetNavigation = useMagnetNavigation,
                                         onAccessoryClick = { playerBottomSheetState.expandSoft() },
                                         onAccessoryLyricsClick = {
                                             playerBottomSheetState.expandSoft()
@@ -1858,14 +1862,14 @@ class MainActivity : ComponentActivity() {
                                             // instead of stretching across the wide screen.
                                             .widthIn(max = 500.dp)
                                             .padding(horizontal = 16.dp)
-                                            .padding(bottom = bottomInset + 16.dp)
+                                            .padding(bottom = bottomInset + navigationBottomPadding)
                                             .graphicsLayer {
                                                 // The floating bar (especially with the docked
                                                 // player accessory) is taller than the classic
                                                 // nav bar, so hide it by its own measured height
                                                 // instead of the fixed nav bar height.
                                                 val hiddenOffset =
-                                                    size.height + (bottomInset + 8.dp).toPx()
+                                                    size.height + (bottomInset + navigationBottomPadding).toPx()
                                                 val navBarHeightPx = navigationBarHeight.toPx()
                                                 // Held still for the whole gesture -- see the
                                                 // classic bar above. The pill docks in here, so
@@ -2347,7 +2351,8 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    app.xan.music.ui.component.NavigationMagnet(
+                    if (useMagnetNavigation) {
+                        app.xan.music.ui.component.NavigationMagnet(
                         currentRoute = effectiveRoute,
                         onLeft = magnetOnLeft,
                         onRecognize = {
@@ -2389,7 +2394,8 @@ class MainActivity : ComponentActivity() {
                                 playerAboveBars -> 96.dp
                                 else -> 16.dp
                             }),
-                    )
+                        )
+                    }
 
                     // One preference decides the presentation for every long-press menu
                     // in the app. Both hosts read the same MenuState, so the ~30 call

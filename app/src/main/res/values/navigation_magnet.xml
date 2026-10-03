@@ -3,6 +3,9 @@
     <string name="close_navigation_magnet">Close navigation menu</string>
     <string name="navigation_magnet_expanded">Navigation menu expanded</string>
     <string name="navigation_magnet_collapsed">Navigation menu collapsed</string>
+    <string name="navigation_style">Navigation style</string>
+    <string name="navigation_style_magnet">Magnet</string>
+    <string name="navigation_style_legacy_buttons">Legacy buttons</string>
     <string name="magnet_position">Magnet position</string>
     <string name="magnet_bottom_left">Bottom left</string>
     <string name="magnet_bottom_right">Bottom right</string>
