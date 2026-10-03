@@ -139,6 +139,7 @@ fun AppFloatingNavBar(
     useMagnetNavigation: Boolean = true,
     magnetOnLeft: Boolean = false,
     onAccessoryClick: () -> Unit = {},
+    onAccessoryDismiss: (() -> Unit)? = null,
     onAccessoryLyricsClick: (() -> Unit)? = null,
     onAccessoryQueueClick: (() -> Unit)? = null,
     // Live fractional tab index while the main tabs pager is moving, null otherwise --
@@ -205,6 +206,7 @@ fun AppFloatingNavBar(
                             onClick = onAccessoryClick,
                             onLyricsClick = onAccessoryLyricsClick,
                             onQueueClick = onAccessoryQueueClick,
+                            onDismissDown = onAccessoryDismiss,
                             pureBlack = pureBlack,
                         )
                     }
@@ -219,6 +221,7 @@ fun AppFloatingNavBar(
                 pureBlack = pureBlack,
                 showPlayerAccessory = showPlayerAccessory,
                 onAccessoryClick = onAccessoryClick,
+                onAccessoryDismiss = onAccessoryDismiss,
                 onAccessoryLyricsClick = onAccessoryLyricsClick,
                 onAccessoryQueueClick = onAccessoryQueueClick,
                 searchModeActive = navSearch.visualActive,
@@ -239,6 +242,7 @@ private fun AppFloatingNavBarChrome(
     pureBlack: Boolean,
     showPlayerAccessory: Boolean,
     onAccessoryClick: () -> Unit,
+    onAccessoryDismiss: (() -> Unit)?,
     onAccessoryLyricsClick: (() -> Unit)?,
     onAccessoryQueueClick: (() -> Unit)?,
     searchModeActive: Boolean,
@@ -329,6 +333,7 @@ private fun AppFloatingNavBarChrome(
                     isInline = true,
                     contentColor = accessoryContentColor,
                     onClick = onAccessoryClick,
+                    onDismissDown = onAccessoryDismiss,
                     // Same lyrics/queue icons render in inline mode as expanded
                     // (FloatingMiniPlayer doesn't gate them on isInline), but this
                     // call site never passed the click handlers — tapping queue
@@ -349,6 +354,7 @@ private fun AppFloatingNavBarChrome(
                     isInline = false,
                     contentColor = accessoryContentColor,
                     onClick = onAccessoryClick,
+                    onDismissDown = onAccessoryDismiss,
                     onLyricsClick = onAccessoryLyricsClick,
                     onQueueClick = onAccessoryQueueClick,
                     modifier = accessoryModifier.fillMaxWidth().then(tabBarContentModifier),
